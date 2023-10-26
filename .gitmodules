@@ -1,3 +1,6 @@
 [submodule "hugo-PaperMod"]
 	path = hugo-PaperMod
 	url = git@github.com:adityatelange/hugo-PaperMod.git
+[submodule "content/submodules/IdleCompute"]
+	path = content/submodules/IdleCompute
+	url = git@github.com:masonwilde/IdleCompute.git
