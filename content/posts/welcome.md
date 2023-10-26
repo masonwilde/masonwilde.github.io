@@ -1,7 +1,8 @@
 +++
 title = 'Welcome'
 date = 2023-10-26T13:23:14-06:00
-draft = true
+draft = false
+markdownify = 'test'
 +++
 
 This is a long overdue blog for my various musings.
