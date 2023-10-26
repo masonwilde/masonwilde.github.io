@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Idle Compute</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="idle_compute.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="description" content="A math and computation idle/clicker game" />
+  <meta name="author" content="masonwilde" />
+</head>
+
+<body onload="startup()" style="display:grid;grid-template-rows: auto 1fr auto;">
+  <header>
+    <h1>Idle Compute <button onclick="reset()">Reset</button></h1>
+  </header>
+  <div class="game-panel flex-vert-filler">
+    <div id="system-ui" class="center-all">
+      <button id="save-button" onclick="save()">save</button>
+      <button id="load-button" onclick="load()">load</button>
+      <button id="playpause-button" onclick="togglePlay()" class="playpause"></button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;">
+      <div id="counts" class="flex-vert-auto" style="display:inline;">
+        <div id="calculations">
+          <span id="calculations-unit">Calculations:</span>
+          <span id="calculations-val">0</span>
+        </div>
+        <div id="cycles">
+          <span id="cycles-unit">Cycles:</span>
+          <span id="cycles-val">0</span>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <div id="notifications"
+          style="overflow: scroll;position: absolute;text-align: left;max-height: 5em;display: flex;flex-direction: column-reverse">
+        </div>
+      </div>
+    </div>
+    <div id="buyables" class="flex-vert-auto"></div>
+    <div id="workspace" class="flex-vert-filler center-all"></div>
+    log
+    <div id="log"
+      style="overflow: scroll;text-align: left;min-height:5em;max-height:5em;display: flex;flex-direction: column-reverse">
+    </div>
+  </div>
+  <footer class="center-all">
+    <div id="footer-author-info">
+      <span>Author: Mason Wilde</span>
+      <span>
+        <a href="https://github.com/masonwilde/IdleCompute">See the code on Github</a>
+      </span>
+    </div>
+    <div id="footer-info-links">
+      <a href="https://mathigon.org/timeline">Timeline of Mathematics</a>
+    </br>
+      <a href="https://en.wikipedia.org/wiki/Timeline_of_mathematics">Timeline of Mathematics Wiki</a>
+    </div>
+  </footer>
+</body>
+
+</html>

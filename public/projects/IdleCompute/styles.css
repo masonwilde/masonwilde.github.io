@@ -1,0 +1,63 @@
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0px 8px;
+  background-color: gray;
+  overflow: hidden;
+}
+
+footer {
+  margin-top: auto;
+}
+
+button {
+  min-height: 10mm;
+  min-width: 15mm;
+}
+
+button.playpause {
+  background-color: red;
+}
+button.playpause.running {
+  background-color: green;
+}
+
+.game-panel {
+  /* align-items: center;
+  justify-content: center; */
+  padding: 8px;
+  background-color: lightgray;
+}
+
+.count-unit {
+  text-align: left;
+}
+
+.count-value {
+  text-align: left;
+  text-color: red;
+  font-weight: bold;
+}
+
+.flex-vert-auto {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 0;
+}
+
+.flex-vert-filler {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+}
+
+.buyables {
+
+}
+
+.center-all {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
