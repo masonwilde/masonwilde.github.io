@@ -1,0 +1,6 @@
+[submodule "content/projects/IdleCompute"]
+	path = content/projects/IdleCompute
+	url = git@github.com:masonwilde/IdleCompute.git
+[submodule "content/themes/PaperMod"]
+	path = content/themes/PaperMod
+	url = https://github.com/adityatelange/hugo-PaperMod.git
