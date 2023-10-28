@@ -3,7 +3,7 @@ title = 'Welcome'
 date = 2023-10-26T13:23:14-06:00
 draft = false
 markdownify = 'test'
-description = 'A test description.'
+description = 'A brief welcome.'
 +++
 
 This is a long overdue blog for my various musings.
