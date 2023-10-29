@@ -40,12 +40,12 @@
 {{- end }}
 
 <!--Changed next line.-->
-<header class="header" style="position:fixed;top:0px;width:100%">
-    <nav class="nav" >
+<header class="header" id="header" style="">
+    <nav class="nav" id="nav" style="position:fixed;top:0px;width:100%;align-items:center;background:var(--theme);">
         <div class="logo">
             {{- $label_text := (site.Params.label.text | default site.Title) }}
             {{- if site.Title }}
-            <a href="{{ "" | absLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)">
+            <a href="{{ "" | absLangURL }}" accesskey="h" title="{{ $label_text }} (Alt + H)" style="height:100%;">
                 {{- if site.Params.label.icon }}
                 {{- $img := resources.Get site.Params.label.icon }}
                 {{- if $img }}
@@ -96,7 +96,7 @@
                     </svg>
                 </button>
                 {{- end }}
-
+    
                 {{- $lang := .Lang}}
                 {{- $separator := or $label_text (not site.Params.disableThemeToggle)}}
                 {{- with site.Home.AllTranslations }}
@@ -126,7 +126,7 @@
             {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
             {{- $page_url:= $currentPage.Permalink | absLangURL }}
             {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
-            <li>
+            <li style="align-items:center;justify-content: center;">
                 <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
                 {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
                     <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
@@ -150,8 +150,14 @@
 </header>
 <!--Added content for sticky header.-->
 <div id="header-offset"></div>
+<div id="searchbox" style="align-items:center;justify-content:center;text-align:center;">
+    <input id="searchInput" placeholder="{{ .Params.placeholder | default (printf "%s ↵" .Title) }}"
+        aria-label="search" type="search" autocomplete="off" style="max-height:2em;width:80%;">
+    <ul id="searchResults" aria-label="search results" style="position:relative;z-index:100;"></ul>
+</div>
+<script src="/assets/js/search.js"></script>
 <script>
-    let header = document.getElementsByClassName("header")[0];
+    let header = document.getElementById("header");
     let headerOffset = document.getElementById("header-offset");
     headerOffset.style.height = header.firstChild.offsetHeight + "px";
 </script>
