@@ -40,8 +40,8 @@
 {{- end }}
 
 <!--Changed next line.-->
-<header class="header" id="header" style="">
-    <nav class="nav" id="nav" style="position:fixed;top:0px;width:100%;align-items:center;background:var(--theme);">
+<header class="header" id="header">
+    <nav class="nav" id="nav" style="position:fixed;top:0px;min-width:100vw;align-items:center;background:var(--theme);">
         <div class="logo">
             {{- $label_text := (site.Params.label.text | default site.Title) }}
             {{- if site.Title }}
