@@ -5,6 +5,15 @@ draft = true
 description = 'Vegan Red/Green Chili for the 2023 CRS Chili Cookoff'
 +++
 
+## Time Required
+* Total: Minimum 5 hours 15 minutes. Ideally 10 hours.
+* Prep Time: 45 minutes
+* Cook Time:
+  * Active: 20 minutes
+  * Slow Cook: at least 4 hours
+* Finishing: 30 minutes
+
+
 ## Ingredients
 * Produce
   * 1 small sweet yellow onion
@@ -14,6 +23,7 @@ description = 'Vegan Red/Green Chili for the 2023 CRS Chili Cookoff'
   * 4 green bell peppers
   * 2 jalapenos
   * 3 12oz cans of diced jackfruit
+  * 5 medium russet potatoes
 * Spices
   * black pepper
   * salt
@@ -44,6 +54,7 @@ description = 'Vegan Red/Green Chili for the 2023 CRS Chili Cookoff'
       1. Dice all the peppers after they cool
    3. Finely mince normal mushrooms using a knife or food processor
    4. Drain the jackfruit and boil in water until tender enough to "mash" into threads. Drain and set aside.
+   5. Peel and dice potatoes
 2. Base
    1. Saute onions in olive oil until translucent
    2. Chop and add roasted garlic - saute until fragrant
@@ -54,8 +65,14 @@ description = 'Vegan Red/Green Chili for the 2023 CRS Chili Cookoff'
    1. Pour in beer and green salsa
    2. Add Better Than Buillion, Marmite, and tomato paste
    3. Bring to a simmer
-4. Jackfruit
+4. Solids
    1. Add the jackfruit threads
+   2. Add the potatoes
 5. Low and Slow
-   1. Set at a low temp and slow cook as long as desired
-6. Salt to taste
+   1. Set at a low temp and slow cook as long as desired. At least 4 hours on high, 8 on low to get the potatoes tender.
+6. Porcinis
+   1. Put the porcinis in a cheese cloth bag and add to the chili
+   2. Cook for 30 minutes
+   3. Remove bag and squeeze out the liquid
+7. Salt to taste
+8. Serve
