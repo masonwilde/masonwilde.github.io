@@ -1,7 +1,7 @@
 +++
 title = 'Chili_Green_Vegan_2023CRSChiliCookoff'
 date = 2023-11-04T09:46:01-06:00
-draft = true
+draft = false
 description = 'Vegan Red/Green Chili for the 2023 CRS Chili Cookoff'
 +++
 
