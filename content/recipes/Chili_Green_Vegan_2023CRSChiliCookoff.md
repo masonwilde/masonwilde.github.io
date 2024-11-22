@@ -1,8 +1,8 @@
 +++
-title = 'Chili_Green_Vegan_2023CRSChiliCookoff'
+title = 'Vegan Jackfruit Green Chili'
 date = 2023-11-04T09:46:01-06:00
 draft = false
-description = 'Vegan Red/Green Chili for the 2023 CRS Chili Cookoff'
+description = 'Vegan Red/Green Chili for the 2024 Chili Cookoff'
 +++
 
 ## Time Required
@@ -16,63 +16,55 @@ description = 'Vegan Red/Green Chili for the 2023 CRS Chili Cookoff'
 
 ## Ingredients
 * Produce
-  * 1 small sweet yellow onion
-  * 2 heads of garlic (about 20 cloves) roasted in oil
-  * 2 lbs mushrooms of your choice
-  * 12 Anaheim peppers
-  * 4 green bell peppers
-  * 2 jalapenos
-  * 3 12oz cans of diced jackfruit
-  * 5 medium russet potatoes
+  * 1 medium white onion
+  * 6 cloves garlic
+  * 1 lbs mushrooms of your choice
+  * 6 Anaheim peppers
+  * 6 Poblano peppers
+  * 2 green bell peppers
+  * 3 lbs canned diced jackfruit
+  * 3 serrano peppers
+  * 2 habanero peppers
 * Spices
   * black pepper
   * salt
   * 2 Tbsp ground cumin
-  * 1/2 Tbsp smoked paprika
+  * 1 Tbsp smoked paprika
   * 2 Tbsp garlic powder
 * Liquids
-  * 48oz Coors Banquet
-  * 1 cup green salsa (I couldn't find tomatillos to make my own this year)
+  * 24oz Coors Banquet
+  * 8 cups vegetable broth (I use Better Than Buillion)
 * Flavor Boosters
-  * 2 Tbsp Better Than Buillion Vegetable Base
-  * 2 Tbsp Marmite
-  * 2 Tbsp tomato paste
-  * 4oz dried procini mushrooms
+  * 2 Tbsp dark soy sauce
+  * 2 Tbsp lime juice
 * Fats
-  * olive oil
+  * vegetable oil
 * Equipment
   * saute pan
   * slowcooker
-  * cheese cloth bag (not necessary)
-  * food processor (not necessary)
-  * Stock pot
 
 ## Steps
 1. Preparation
-   1. Roast garlic in oil - 350F for 30 minutes
-   2. Seed/pit anaheims, jalapenos, and bell peppers, coat in oil and roast at 400F for 30 minutes
-      1. Dice all the peppers after they cool
-   3. Finely mince normal mushrooms using a knife or food processor
-   4. Drain the jackfruit and boil in water until tender enough to "mash" into threads. Drain and set aside.
-   5. Peel and dice potatoes
+  1. Seed/pit anaheims, poblanos, and bell peppers, coat in oil and roast at 450F for 15-20 minutes or until slightly blackened.
+    1. Dice all the peppers after they cool (Can also dice before roasting, just be careful not to burn them).
+  2. Finely mince normal mushrooms using a knife or food processor.
+  3. Dice onion, serranos, and habaneros.
+  4. Drain the jackfruit and boil in water until tender enough to "mash" into threads. Drain and set aside.
 2. Base
-   1. Saute onions in olive oil until translucent
-   2. Chop and add roasted garlic - saute until fragrant
-   3. Add minced mushrooms - saute until they release their liquid and start to brown
-   4. Add cumin, paprika, garlic powder, and pepper - saute until fragrant and mixed
-   5. Add all to the slow cooker
+  1. Saute onions, serranos, and habaneros in oil until translucent.
+  2. Add minced mushrooms - saute until they release their liquid and start to brown.
+  3. Chop and add garlic - saute until fragrant.
+  4. Add cumin, paprika, garlic powder, and pepper - saute until fragrant and mixed.
+  5. Add all to the slow cooker.
 3. Adding the Broth
-   1. Pour in beer and green salsa
-   2. Add Better Than Buillion, Marmite, and tomato paste
-   3. Bring to a simmer
+  1. Pour in beer and broth.
+  2. Bring to a simmer.
 4. Solids
-   1. Add the jackfruit threads
-   2. Add the potatoes
+  1. Add the jackfruit threads.
 5. Low and Slow
-   1. Set at a low temp and slow cook as long as desired. At least 4 hours on high, 8 on low to get the potatoes tender.
-6. Porcinis
-   1. Put the porcinis in a cheese cloth bag and add to the chili
-   2. Cook for 30 minutes
-   3. Remove bag and squeeze out the liquid
-7. Salt to taste
-8. Serve
+  1. Set at a low temp and slow cook as long as desired. At least 4 hours on high or 8 on low.
+6. Final touches
+  1. Salt to taste.
+  2. If you feel it's missing something, try adding a bit more lime juice or other acid before going too far with salt.
+  3. If you want more savoriness or "meatiness", try a little more soy or something like MSG or mushroom powder.
+7. Serve
