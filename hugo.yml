@@ -1,6 +1,5 @@
 baseURL: "https://masonwilde.github.io/"
 title: Wilde.dev
-paginate: 5
 theme: PaperMod
 
 enableRobotsTXT: true
@@ -117,7 +116,7 @@ outputs:
   home:
     - HTML
     - RSS
-    - JSON # is necessary 
+    - JSON # is necessary
 menu:
   main:
     - identifier: posts
@@ -146,3 +145,4 @@ markup:
     # guessSyntax: true
     # lineNos: true
     # style: monokai
+
