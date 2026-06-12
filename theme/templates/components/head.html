@@ -1,0 +1,53 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+<meta name="author" content="{{ site.author }}">
+
+<meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+<meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+<meta property="og:type" content="website">
+{% if site.profile.image %}<meta property="og:image" content="{{ site.base_url | safe }}{{ site.profile.image | safe }}">{% endif %}
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/css/style.css">
+<link rel="icon" type="image/jpeg" href="{% if site.favicon %}{{ site.favicon | safe }}{% elif site.profile.image %}{{ site.profile.image | safe }}{% endif %}">
+
+<style>
+:root {
+    --bg: {{ site.colors.light.bg | safe }};
+    --text: {{ site.colors.light.text | safe }};
+    --text-secondary: {{ site.colors.light.text_secondary | safe }};
+    --accent: {{ site.colors.light.accent | safe }};
+    --accent-hover: {{ site.colors.light.accent_hover | safe }};
+    --border: {{ site.colors.light.border | safe }};
+    --code-bg: {{ site.colors.light.code_bg | safe }};
+    --nav-bg: {{ site.colors.light.nav_bg | safe }};
+    --card-bg: {{ site.colors.light.card_bg | safe }};
+    --active-nav: {{ site.colors.light.active_nav | safe }};
+    --font-sans: {{ site.fonts.sans | safe }};
+    --font-mono: {{ site.fonts.mono | safe }};
+    --max-width: {{ site.layout.max_width | safe }};
+    --nav-height: {{ site.layout.nav_height | safe }};
+}
+.dark {
+    --bg: {{ site.colors.dark.bg | safe }};
+    --text: {{ site.colors.dark.text | safe }};
+    --text-secondary: {{ site.colors.dark.text_secondary | safe }};
+    --accent: {{ site.colors.dark.accent | safe }};
+    --accent-hover: {{ site.colors.dark.accent_hover | safe }};
+    --border: {{ site.colors.dark.border | safe }};
+    --code-bg: {{ site.colors.dark.code_bg | safe }};
+    --nav-bg: {{ site.colors.dark.nav_bg | safe }};
+    --card-bg: {{ site.colors.dark.card_bg | safe }};
+    --active-nav: {{ site.colors.dark.active_nav | safe }};
+}
+</style>
+
+<script>
+    if (localStorage.getItem('theme') === 'dark' ||
+        (!localStorage.getItem('theme') &&
+         window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+</script>

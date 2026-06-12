@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "components/head.html" %}
+</head>
+<body>
+    {% include "components/nav.html" %}
+
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+
+    {% include "components/footer.html" %}
+
+    <script src="/js/main.js" defer></script>
+</body>
+</html>

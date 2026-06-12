@@ -1,0 +1,25 @@
+{
+    "title": "Wilde.dev",
+    "description": "A blog of mainly software.",
+    "author": "Mason Wilde",
+    "base_url": "https://masonwilde.github.io",
+    "nav": [
+        {"name": "Posts", "url": "/posts/"},
+        {"name": "Recipes", "url": "/recipes/"},
+        {"name": "Outdoors", "url": "/outdoors/"},
+        {"name": "Resume", "url": "/resume/"}
+    ],
+    "social": [
+        {"name": "GitHub", "url": "https://github.com/masonwilde"},
+        {"name": "LinkedIn", "url": "https://www.linkedin.com/in/masonwilde/"}
+    ],
+    "profile": {
+        "image": "/img/mason_wilde.jpeg",
+        "subtitle": "Programmer, Lifter, DM, and more."
+    },
+    "theme_dir": "theme",
+    "code_theme": "base16-ocean.dark",
+    "not_found": {
+        "image": "/img/travolta-boomerang.gif"
+    }
+}
