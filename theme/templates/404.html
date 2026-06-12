@@ -4,7 +4,7 @@
 <div class="not-found">
     <h1>{{ site.not_found.title }}</h1>
     <p>{{ site.not_found.message }}</p>
-    <a href="/" class="go-home">{{ site.not_found.home_text }}</a>
     {% if site.not_found.image %}<img src="{{ site.not_found.image | safe }}" alt="" class="not-found-img">{% endif %}
+    <a href="/" class="go-home">{{ site.not_found.home_text }}</a>
 </div>
 {% endblock content %}
