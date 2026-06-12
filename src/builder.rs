@@ -2,17 +2,10 @@ use std::collections::HashMap;
 use std::fs;
 use std::path::Path;
 
-use serde::Serialize;
 use tera::{Context, Tera};
 
 use crate::config::SiteConfig;
 use crate::content::{load_content, Page};
-
-#[derive(Debug, Serialize)]
-struct Section {
-    name: String,
-    pages: Vec<Page>,
-}
 
 fn empty_page_with_title(title: &str) -> serde_json::Value {
     serde_json::json!({"title": title, "description": "", "url": "", "date": "", "content": "", "meta": {}})
@@ -23,11 +16,17 @@ fn empty_page() -> serde_json::Value {
 }
 
 fn section_display_name(name: &str) -> String {
-    let mut result = name.replace('_', " ");
-    if let Some(first) = result.get_mut(..1) {
-        first.make_ascii_uppercase();
-    }
-    result
+    name.replace('_', " ")
+        .split_whitespace()
+        .map(|w| {
+            let mut chars = w.chars();
+            match chars.next() {
+                Some(c) => c.to_uppercase().to_string() + chars.as_str(),
+                None => String::new(),
+            }
+        })
+        .collect::<Vec<_>>()
+        .join(" ")
 }
 
 fn current_year() -> u64 {
@@ -59,10 +58,7 @@ fn load_template_context(base_dir: &Path, config: &SiteConfig) -> Result<serde_j
         serde_json::Value::Object(Default::default())
     };
 
-    let site_json: serde_json::Value = serde_json::from_str(
-        &fs::read_to_string(base_dir.join("site.json"))
-            .map_err(|e| format!("Failed to read site.json: {e}"))?
-    ).map_err(|e| format!("Failed to parse site.json: {e}"))?;
+    let site_json = serde_json::to_value(config)?;
     deep_merge(&mut context, &site_json);
 
     Ok(context)
@@ -167,7 +163,6 @@ fn render_section_indexes(
 fn render_special_pages(
     tera: &Tera,
     config: &SiteConfig,
-    sections: &[Section],
     site_context: &serde_json::Value,
     output: &Path,
 ) -> Result<(), Box<dyn std::error::Error>> {
@@ -175,7 +170,6 @@ fn render_special_pages(
 
     let mut context = Context::new();
     context.insert("site", site_context);
-    context.insert("sections", sections);
     context.insert("page", &empty_page());
     context.insert("build_year", &year);
     fs::write(output.join("index.html"), tera.render(&config.pages.home, &context)?)?;
@@ -227,17 +221,10 @@ pub fn build_site(base_dir: &Path) -> Result<(), Box<dyn std::error::Error>> {
 
     render_pages(&tera, &pages, &site_context, &output)?;
     render_section_indexes(&tera, &config, &section_map, &site_context, &base_dir.join(&config.content_dir), &output)?;
-
-    let mut sections: Vec<Section> = section_map
-        .into_iter()
-        .map(|(name, pages)| Section { name, pages })
-        .collect();
-    sections.sort_by(|a, b| a.name.cmp(&b.name));
-
-    render_special_pages(&tera, &config, &sections, &site_context, &output)?;
+    render_special_pages(&tera, &config, &site_context, &output)?;
     copy_static_assets(base_dir, &config, &output)?;
 
-    println!("Built {} pages in {} sections", pages.len(), sections.len());
+    println!("Built {} pages in {} sections", pages.len(), section_map.len());
     Ok(())
 }
 
@@ -311,7 +298,7 @@ mod tests {
     #[test]
     fn section_display_name_capitalizes() {
         assert_eq!(section_display_name("posts"), "Posts");
-        assert_eq!(section_display_name("my_recipes"), "My recipes");
+        assert_eq!(section_display_name("my_recipes"), "My Recipes");
     }
 
     #[test]

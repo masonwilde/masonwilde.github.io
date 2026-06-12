@@ -10,7 +10,6 @@ pub struct NavItem {
 pub struct SocialLink {
     pub name: String,
     pub url: String,
-    pub icon: Option<String>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -76,8 +75,6 @@ pub struct SiteConfig {
     pub include_drafts: bool,
     #[serde(default)]
     pub pages: PageTemplates,
-    #[serde(default)]
-    pub theme_vars: serde_json::Value,
 }
 
 fn default_content_dir() -> String {
