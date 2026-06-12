@@ -15,16 +15,14 @@ I read a bunch of various posts about bug out and go bags, and it seems like eve
 ### What do I have?
 My first thought is to layer my supplies based on what I have.
 
-1. My body and mind
-2. Phone + Wallet
-3. Clothes
-4. A backpack
-5. My Car
-6. My Home
+1. My body, mind, and pockets
+2. A backpack
+3. My Car
+4. My Home
 
-Each layer assumes I have the previous, and include increasingly more supplies.
+Each layer assumes I have the previous, and includes increasingly more supplies.
 
-I always have my mind and body, and 99% of the time I have my phone and wallet. If I have clothes on, I hopefully have at least one pocket. If I have a backpack, I can carry more supplies. If I have my car, I can carry even more supplies and store a proper bug out bag. If I have my home, I can load my car with the max supplies.
+I always have my mind and body, and if I'm dressed I've got my phone, wallet, and pocket kit. If I have a backpack, I can carry more supplies. If I have my car, I can carry even more supplies and store a proper bug out bag. If I have my home, I can load my car with the max supplies.
 
 ### What do I need for survival?
 My second thought is to layer my supplies based on what I need. My own hierarchy of needs (based on various others too numerous to list) is:
@@ -45,10 +43,9 @@ On top of these needs, it is also helpful to have some tools that make certain t
 
 ## The Kits
 
-### My Body and Mind
-What if I'm stranded naked on a desert island? I need to be able to survive with nothing but my body and mind. This mostly comes down to knowledge. Take a first aid course, do a wilderness survival lesson. Figure out some basic foraging in your area and learn basic knots as well as how to make basic cordage from natural resources.
+### On My Person
+The foundation is knowledge - take a first aid course, do a wilderness survival lesson, learn basic foraging in your area, and practice basic knots and cordage from natural resources. Everything below assumes I'm dressed and have my phone and wallet. The pocket kit is what I *should* always carry, but don't always have on me.
 
-### Phone + Wallet
 * Phone
   * Offline Maps
   * Offline Survival Guides (Knots, Foraging, Shelter, SERE, etc.)
@@ -63,28 +60,19 @@ What if I'm stranded naked on a desert island? I need to be able to survive with
   * Cordage
   * Sewing Kit
   * Notepad
-
-### Clothes
-Assuming I have at least one pocket, what should I ALWAYS carry.
-
-* Organizer ([ALPAKA Zip Pouch Pro](https://alpakagear.com/products/zip-pouch-pro))
+* CPR Mask (Pocket Version [amazon](https://a.co/d/8Fb2uYD)) - on keychain
+* Pocket Organizer ([ALPAKA Zip Pouch Pro](https://alpakagear.com/products/zip-pouch-pro))
   * Fits in a front pocket, running belt, etc.
-* CPR Mask (Pocket Version [amazon](https://a.co/d/8Fb2uYD))
-  * You never know...
-* Multitool ([Leatherman Signal](https://www.leatherman.com/signal-832262.html) [amazon](https://a.co/d/0iPJDFO))
-  * Knife, pliers, saw, firesteel, hammer, etc.
-* Flashlight ([Olight i3T EOS](https://www.olightstore.com/i3t-eos.html) [amazon](https://a.co/d/igVQdph))
-  * Little guy
-* Pen ([Fisher Space Pen](https://www.spacepen.com/originalastronautspacepen.aspx))
-  * Writes upside down, in space, and underwater] [amazon](https://a.co/d/6WYleJq))
-* Notepad ([Rite in the Rain](https://www.riteintherain.com/rite-in-the-rain-3-x-5-top-spiral-notebook-3-pack) [amazon](https://a.co/d/3bxy4CK))
-* Lighter ([BIC](https://us.bic.com/en_us/bic-lighters.html) [amazon](https://a.co/d/iQbj3n7))
-* Cordage
-  * Little Paracord or just some twine
-* Glue stick
-  * Thin gauge - great for bonding little things
-* Superglue
-  * Bonding or cuts
+  * Leatherman Micra
+  * Victorinox Small Knife
+  * Nail Clippers
+  * Flashlight ([Olight i3T EOS](https://www.olightstore.com/i3t-eos.html) [amazon](https://a.co/d/igVQdph))
+  * Pen ([Fisher Space Pen](https://www.spacepen.com/originalastronautspacepen.aspx) [amazon](https://a.co/d/6WYleJq))
+  * Notepad ([Rite in the Rain](https://www.riteintherain.com/rite-in-the-rain-3-x-5-top-spiral-notebook-3-pack) [amazon](https://a.co/d/3bxy4CK))
+  * Lighter ([BIC](https://us.bic.com/en_us/bic-lighters.html) [amazon](https://a.co/d/iQbj3n7))
+  * Cordage - little paracord or just some twine
+  * Glue stick - thin gauge, great for bonding little things
+  * Superglue - bonding or cuts
 
 ### Backpack
 What if I have a backpack? What should I ALWAYS carry.
