@@ -133,12 +133,17 @@ fn render_section_indexes(
     }
 
     // Also generate indexes for content subdirectories that exist but have no pages
+    // Skip directories that have an explicit index page (handled by render_pages)
     if content_dir.exists() {
         for entry in fs::read_dir(content_dir)? {
             let entry = entry?;
             if entry.file_type()?.is_dir() {
                 let name = entry.file_name().to_string_lossy().to_string();
-                sections_to_render.entry(name).or_insert(&empty);
+                let has_index = section_map.get(&name)
+                    .is_some_and(|pages| pages.iter().any(|p| p.slug == "index"));
+                if !has_index {
+                    sections_to_render.entry(name).or_insert(&empty);
+                }
             }
         }
     }

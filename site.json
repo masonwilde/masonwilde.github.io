@@ -7,7 +7,7 @@
         {"name": "Posts", "url": "/posts/"},
         {"name": "Recipes", "url": "/recipes/"},
         {"name": "Outdoors", "url": "/outdoors/"},
-        {"name": "CV", "url": "/resume/"}
+        {"name": "CV", "url": "/cv/"}
     ],
     "social": [
         {"name": "GitHub", "url": "https://github.com/masonwilde"},
