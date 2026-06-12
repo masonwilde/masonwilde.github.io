@@ -1,10 +1,10 @@
-+++
-title = 'Welcome'
-date = 2023-10-26T13:23:14-06:00
-draft = false
-markdownify = 'test'
-description = 'A brief welcome.'
-+++
+---
+{
+    "title": "Welcome",
+    "date": "2023-10-26",
+    "description": "A brief welcome."
+}
+---
 
 This is a long overdue blog for my various musings.
 

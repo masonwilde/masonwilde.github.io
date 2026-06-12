@@ -1,9 +1,11 @@
-+++
-title = 'Dev Setup Series: MacOS 14'
-date = 2023-11-09T08:09:09-07:00
-draft = true
-description = 'My setup steps for a new MacOS 14 device.'
-+++
+---
+{
+    "title": "Dev Setup Series: MacOS 14",
+    "date": "2023-11-09",
+    "draft": true,
+    "description": "My setup steps for a new MacOS 14 device."
+}
+---
 
 # MacOS 14 Developer Setup
 

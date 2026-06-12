@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article class="resume-page">
+    <h1>{{ page.title }}</h1>
+    {% if page.meta.pdf %}
+    <iframe src="{{ page.meta.pdf | safe }}#pagemode=none&toolbar=0&navpanes=0&view=FitH,0" title="{{ page.title }}"></iframe>
+    <p class="resume-fallback"><a href="{{ page.meta.pdf | safe }}">Download PDF</a></p>
+    {% endif %}
+</article>
+{% endblock content %}

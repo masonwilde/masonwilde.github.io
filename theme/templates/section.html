@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ section_name | replace(from="_", to=" ") | title }}</h1>
+{% if pages %}
+<ul class="page-list">
+    {% for p in pages %}
+    <li>
+        <a href="{{ p.url | safe }}">
+            <span class="page-list-title">{{ p.title }}</span>
+            {% if p.date %}<time datetime="{{ p.date }}">{{ p.date }}</time>{% endif %}
+        </a>
+        {% if p.description %}<p class="page-list-desc">{{ p.description }}</p>{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="empty-section">{{ site.empty_section | safe }}</p>
+{% endif %}
+{% endblock content %}

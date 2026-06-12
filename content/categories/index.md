@@ -1,4 +1,0 @@
----
-title: "database"
-layout: "categories"
----

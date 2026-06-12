@@ -1,0 +1,9 @@
+<footer>
+    <span>&copy; {{ build_year }} <a href="/">{{ site.title }}</a></span>
+    {% if site.footer.text %}<p>{{ site.footer.text }}</p>{% endif %}
+    <div class="footer-links">
+        {% for link in site.social %}
+        <a href="{{ link.url | safe }}" target="_blank" rel="noopener noreferrer">{{ link.name }}</a>
+        {% endfor %}
+    </div>
+</footer>
