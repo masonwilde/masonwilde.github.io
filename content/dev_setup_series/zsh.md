@@ -1,8 +1,10 @@
-+++
-title = 'Zsh'
-date = 2023-11-09T10:28:36-07:00
-draft = true
-+++
+---
+{
+    "title": "Dev Setup Series: Zsh",
+    "date": "2023-11-09",
+    "draft": true
+}
+---
 
 # Zsh Setup
 Coming Soon

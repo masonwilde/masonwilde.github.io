@@ -1,9 +1,10 @@
-+++
-title = 'Vegan Jackfruit Green Chili'
-date = 2023-11-04T09:46:01-06:00
-draft = false
-description = 'Vegan Red/Green Chili for the 2024 Chili Cookoff'
-+++
+---
+{
+    "title": "Vegan Jackfruit Green Chili",
+    "date": "2023-11-04",
+    "description": "Vegan Red/Green Chili for the 2024 Chili Cookoff"
+}
+---
 
 ## Time Required
 * Total: Minimum 5 hours 15 minutes. Ideally 10 hours.

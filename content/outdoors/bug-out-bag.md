@@ -1,11 +1,12 @@
-+++
-title = 'EDC to Bug Out Progression'
-date = 2023-12-18T17:04:31-06:00
-draft = false
-description = 'My system for balancing EDC and Bug Out Bags.'
-+++
+---
+{
+    "title": "EDC to Bug Out Progression",
+    "date": "2023-12-18",
+    "description": "My system for balancing EDC and Bug Out Bags."
+}
+---
 
-# EDC2Bug v2 (2023)
+## EDC2Bug v2 (2023)
 Disclaimer: I'll only provide links to products I personally have in my system. I'm not sponsored by anyone, and I don't get any kickbacks. I'm just sharing what I use.
 
 ## Philosophy

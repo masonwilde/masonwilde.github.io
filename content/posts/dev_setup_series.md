@@ -1,9 +1,11 @@
-+++
-title = 'Dev Setup Series'
-date = 2023-11-09T10:31:15-07:00
-draft = true
-description = 'Guides for setting up various developer environments.'
-+++
+---
+{
+    "title": "Dev Setup Series",
+    "date": "2023-11-09",
+    "draft": true,
+    "description": "Guides for setting up various developer environments."
+}
+---
 
 # The Wilde Way
 
