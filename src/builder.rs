@@ -50,7 +50,7 @@ fn deep_merge(base: &mut serde_json::Value, overlay: &serde_json::Value) {
     }
 }
 
-fn load_template_context(base_dir: &Path, config: &SiteConfig) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
+fn load_template_context(base_dir: &Path, config: &SiteConfig, site_json_str: &str) -> Result<serde_json::Value, Box<dyn std::error::Error>> {
     let vars_path = base_dir.join(&config.theme_dir).join("variables.json");
     let mut context = if vars_path.exists() {
         serde_json::from_str(&fs::read_to_string(&vars_path)?)?
@@ -58,7 +58,7 @@ fn load_template_context(base_dir: &Path, config: &SiteConfig) -> Result<serde_j
         serde_json::Value::Object(Default::default())
     };
 
-    let site_json = serde_json::to_value(config)?;
+    let site_json: serde_json::Value = serde_json::from_str(site_json_str)?;
     deep_merge(&mut context, &site_json);
 
     Ok(context)
@@ -198,16 +198,16 @@ fn copy_static_assets(base_dir: &Path, config: &SiteConfig, output: &Path) -> Re
 }
 
 pub fn build_site(base_dir: &Path) -> Result<(), Box<dyn std::error::Error>> {
-    let config: SiteConfig = serde_json::from_str(
-        &fs::read_to_string(base_dir.join("site.json"))
-            .map_err(|e| format!("Failed to read site.json: {e}"))?
-    ).map_err(|e| format!("Failed to parse site.json: {e}"))?;
+    let site_json_str = fs::read_to_string(base_dir.join("site.json"))
+        .map_err(|e| format!("Failed to read site.json: {e}"))?;
+    let config: SiteConfig = serde_json::from_str(&site_json_str)
+        .map_err(|e| format!("Failed to parse site.json: {e}"))?;
 
     let template_glob = format!("{}/{}/templates/**/*.html", base_dir.display(), config.theme_dir);
     let tera = Tera::new(&template_glob)
         .map_err(|e| format!("Failed to load templates from {}: {e}", config.theme_dir))?;
 
-    let site_context = load_template_context(base_dir, &config)?;
+    let site_context = load_template_context(base_dir, &config, &site_json_str)?;
 
     let pages = load_content(
         &base_dir.join(&config.content_dir),
@@ -323,13 +323,12 @@ mod tests {
     #[test]
     fn load_template_context_uses_variables_json_defaults() {
         let dir = TempDir::new().unwrap();
-        write_file(dir.path(), "site.json", r#"{"title":"Test","profile":{"image":"/t.jpg","subtitle":"t"}}"#);
+        let site_json = r#"{"title":"Test","profile":{"image":"/t.jpg","subtitle":"t"}}"#;
+        write_file(dir.path(), "site.json", site_json);
         write_file(dir.path(), "theme/variables.json", r##"{"colors":{"bg":"#fff","text":"#000"},"title":"Default"}"##);
 
-        let config: SiteConfig = serde_json::from_str(
-            &fs::read_to_string(dir.path().join("site.json")).unwrap()
-        ).unwrap();
-        let ctx = load_template_context(dir.path(), &config).unwrap();
+        let config: SiteConfig = serde_json::from_str(site_json).unwrap();
+        let ctx = load_template_context(dir.path(), &config, site_json).unwrap();
 
         // site.json title wins over variables.json default
         assert_eq!(ctx["title"], "Test");
@@ -341,12 +340,11 @@ mod tests {
     #[test]
     fn load_template_context_without_variables_json() {
         let dir = TempDir::new().unwrap();
-        write_file(dir.path(), "site.json", r#"{"title":"Test","profile":{"image":"/t.jpg","subtitle":"t"}}"#);
+        let site_json = r#"{"title":"Test","profile":{"image":"/t.jpg","subtitle":"t"}}"#;
+        write_file(dir.path(), "site.json", site_json);
 
-        let config: SiteConfig = serde_json::from_str(
-            &fs::read_to_string(dir.path().join("site.json")).unwrap()
-        ).unwrap();
-        let ctx = load_template_context(dir.path(), &config).unwrap();
+        let config: SiteConfig = serde_json::from_str(site_json).unwrap();
+        let ctx = load_template_context(dir.path(), &config, site_json).unwrap();
 
         assert_eq!(ctx["title"], "Test");
     }
