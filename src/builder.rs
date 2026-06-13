@@ -8,7 +8,7 @@ use crate::config::SiteConfig;
 use crate::content::{load_content, Page};
 
 fn empty_page_with_title(title: &str) -> serde_json::Value {
-    serde_json::json!({"title": title, "description": "", "url": "", "date": "", "content": "", "meta": {}})
+    serde_json::json!({"title": title, "description": "", "url": "", "date": "", "content": "", "meta": {}, "tabs": []})
 }
 
 fn empty_page() -> serde_json::Value {

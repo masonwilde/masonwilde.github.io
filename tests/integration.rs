@@ -17,7 +17,7 @@ fn setup_site(dir: &Path) {
     write_file(dir, "site.json", r#"{"title":"Test Site","description":"A test","author":"Tester","base_url":"https://example.com","nav":[{"name":"Posts","url":"/posts/"}],"social":[],"profile":{"image":"/img/test.jpg","subtitle":"Testing"}}"#);
     write_file(dir, "content/posts/hello.md", "---\n{\"title\": \"Hello\", \"date\": \"2024-01-01\", \"description\": \"A greeting\"}\n---\n\n# Hello World");
     write_file(dir, "theme/templates/base.html", "<!DOCTYPE html><html><head><title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title></head><body>{% block content %}{% endblock content %}</body></html>");
-    write_file(dir, "theme/templates/page.html", "{% extends \"base.html\" %}{% block content %}<article><h1>{{ page.title }}</h1>{{ page.content | safe }}</article>{% endblock content %}");
+    write_file(dir, "theme/templates/page.html", "{% extends \"base.html\" %}{% block content %}<article><h1>{{ page.title }}</h1>{% if page.tabs | length > 0 %}<div class=\"tabs\"><div class=\"tab-bar\">{% for tab in page.tabs %}<button class=\"tab-btn\" data-tab=\"{{ tab.slug }}\">{{ tab.name }}</button>{% endfor %}</div>{% for tab in page.tabs %}<div class=\"tab-panel\" data-tab=\"{{ tab.slug }}\">{{ tab.content | safe }}</div>{% endfor %}</div>{% else %}{{ page.content | safe }}{% endif %}</article>{% endblock content %}");
     write_file(dir, "theme/templates/section.html", "{% extends \"base.html\" %}{% block content %}<h1>{{ section_name }}</h1>{% for p in pages %}<a href=\"{{ p.url }}\">{{ p.title }}</a>{% endfor %}{% endblock content %}");
     write_file(dir, "theme/templates/home.html", "{% extends \"base.html\" %}{% block content %}<h1>{{ site.title }}</h1>{% endblock content %}");
     write_file(dir, "theme/templates/404.html", "{% extends \"base.html\" %}{% block content %}<h1>404</h1>{% endblock content %}");
@@ -144,4 +144,57 @@ fn custom_page_template_names() {
     build_site(dir.path()).unwrap();
     assert!(fs::read_to_string(dir.path().join("public/index.html")).unwrap().contains("LANDING"));
     assert!(fs::read_to_string(dir.path().join("public/404.html")).unwrap().contains("OOPS"));
+}
+
+#[test]
+fn tabbed_page_renders_with_tabs() {
+    let dir = TempDir::new().unwrap();
+    setup_site(dir.path());
+    write_file(
+        dir.path(),
+        "content/recipes/bread/_index.md",
+        "---\n{\"title\": \"Bread\", \"date\": \"2024-01-01\", \"tabs\": [\"basic\", \"advanced\"]}\n---\n",
+    );
+    write_file(
+        dir.path(),
+        "content/recipes/bread/basic.md",
+        "---\n{\"title\": \"Basic\"}\n---\n\n# Basic Recipe",
+    );
+    write_file(
+        dir.path(),
+        "content/recipes/bread/advanced.md",
+        "---\n{\"title\": \"Advanced\"}\n---\n\n# Advanced Recipe",
+    );
+    build_site(dir.path()).unwrap();
+
+    let page = dir.path().join("public/recipes/bread/index.html");
+    assert!(page.exists(), "Tabbed page should be rendered at /recipes/bread/");
+    let html = fs::read_to_string(page).unwrap();
+    assert!(html.contains("Bread |"), "Page title should be in <title>");
+    assert!(html.contains("tab-btn"), "Should have tab buttons");
+    assert!(html.contains("data-tab=\"basic\""), "Should have basic tab");
+    assert!(html.contains("data-tab=\"advanced\""), "Should have advanced tab");
+    assert!(html.contains("Basic Recipe"), "Should contain basic tab content");
+    assert!(html.contains("Advanced Recipe"), "Should contain advanced tab content");
+
+    // Tab files should NOT be rendered as standalone pages
+    assert!(!dir.path().join("public/recipes/bread/basic/index.html").exists());
+    assert!(!dir.path().join("public/recipes/bread/advanced/index.html").exists());
+}
+
+#[test]
+fn tabbed_page_appears_in_section_index() {
+    let dir = TempDir::new().unwrap();
+    setup_site(dir.path());
+    write_file(
+        dir.path(),
+        "content/posts/guide/_index.md",
+        "---\n{\"title\": \"Guide\", \"date\": \"2024-02-01\", \"tabs\": [\"intro\"]}\n---\n",
+    );
+    write_file(dir.path(), "content/posts/guide/intro.md", "Intro content");
+    build_site(dir.path()).unwrap();
+
+    let index = dir.path().join("public/posts/index.html");
+    let html = fs::read_to_string(index).unwrap();
+    assert!(html.contains("Guide"), "Tabbed page should appear in section index");
 }

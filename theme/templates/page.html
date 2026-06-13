@@ -7,6 +7,27 @@
         {% if page.date %}<time datetime="{{ page.date }}">{{ page.date }}</time>{% endif %}
         {% if page.description %}<p class="description">{{ page.description }}</p>{% endif %}
     </header>
+    {% if page.tabs | length > 0 %}
+    {% if page.content | length > 0 %}<div class="tab-intro">{{ page.content | safe }}</div>{% endif %}
+    <div class="tabs">
+        <div class="tab-bar" role="tablist">
+            {% for tab in page.tabs %}
+            <button class="tab-btn{% if loop.first %} active{% endif %}"
+                    role="tab"
+                    aria-selected="{% if loop.first %}true{% else %}false{% endif %}"
+                    data-tab="{{ tab.slug }}">{{ tab.name }}</button>
+            {% endfor %}
+        </div>
+        {% for tab in page.tabs %}
+        <div class="tab-panel{% if loop.first %} active{% endif %}"
+             data-tab="{{ tab.slug }}"
+             role="tabpanel">
+            {{ tab.content | safe }}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
     {{ page.content | safe }}
+    {% endif %}
 </article>
 {% endblock content %}
