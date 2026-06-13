@@ -2,7 +2,7 @@
 {
     "title": "Vegan Jackfruit Green Chili",
     "date": "2023-11-04",
-    "description": "Vegan Red/Green Chili for the 2024 Chili Cookoff"
+    "description": "Vegan Red/Green Chili for the 2023 Chili Cookoff"
 }
 ---
 
