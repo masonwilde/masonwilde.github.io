@@ -2,8 +2,30 @@
 
 {% block content %}
 <article class="resume-page">
-    <h1>{{ page.title }}</h1>
-    {% if page.meta.pdf %}
+    {% if page.tabs | length > 0 %}
+    <div class="tabs">
+        <div class="tab-bar" role="tablist">
+            {% for tab in page.tabs %}
+            <button class="tab-btn{% if loop.first %} active{% endif %}"
+                    role="tab"
+                    aria-selected="{% if loop.first %}true{% else %}false{% endif %}"
+                    data-tab="{{ tab.slug }}">{{ tab.name }}</button>
+            {% endfor %}
+        </div>
+        {% for tab in page.tabs %}
+        <div class="tab-panel{% if loop.first %} active{% endif %}"
+             data-tab="{{ tab.slug }}"
+             role="tabpanel">
+            {% if tab.meta.pdf %}
+            <iframe src="{{ tab.meta.pdf | safe }}#pagemode=none&toolbar=0&navpanes=0&view=FitH,0" title="{{ tab.name }}"></iframe>
+            <p class="resume-fallback"><a href="{{ tab.meta.pdf | safe }}">Download PDF</a></p>
+            {% else %}
+            {{ tab.content | safe }}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% elif page.meta.pdf %}
     <iframe src="{{ page.meta.pdf | safe }}#pagemode=none&toolbar=0&navpanes=0&view=FitH,0" title="{{ page.title }}"></iframe>
     <p class="resume-fallback"><a href="{{ page.meta.pdf | safe }}">Download PDF</a></p>
     {% endif %}

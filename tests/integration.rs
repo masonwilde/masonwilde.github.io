@@ -198,3 +198,26 @@ fn tabbed_page_appears_in_section_index() {
     let html = fs::read_to_string(index).unwrap();
     assert!(html.contains("Guide"), "Tabbed page should appear in section index");
 }
+
+#[test]
+fn top_level_tabbed_page_not_overwritten_by_section_index() {
+    let dir = TempDir::new().unwrap();
+    setup_site(dir.path());
+    write_file(dir.path(), "theme/templates/resume.html",
+        "{% extends \"base.html\" %}{% block content %}<div class=\"resume\">{% if page.tabs | length > 0 %}TABBED_RESUME{% endif %}</div>{% endblock content %}");
+    write_file(
+        dir.path(),
+        "content/cv/_index.md",
+        "---\n{\"title\": \"CV\", \"template\": \"resume\", \"tabs\": [\"general\"]}\n---\n",
+    );
+    write_file(
+        dir.path(),
+        "content/cv/general.md",
+        "---\n{\"title\": \"General\", \"pdf\": \"/doc/resume.pdf\"}\n---\n",
+    );
+    build_site(dir.path()).unwrap();
+
+    let page = dir.path().join("public/cv/index.html");
+    let html = fs::read_to_string(page).unwrap();
+    assert!(html.contains("TABBED_RESUME"), "CV page should use resume template, not be overwritten by section index");
+}

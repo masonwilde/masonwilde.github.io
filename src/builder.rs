@@ -116,12 +116,19 @@ fn render_section_indexes(
     tera: &Tera,
     config: &SiteConfig,
     section_map: &HashMap<String, Vec<Page>>,
+    pages: &[Page],
     site_context: &serde_json::Value,
     content_dir: &Path,
     output: &Path,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let year = current_year();
     let empty: Vec<Page> = Vec::new();
+
+    let top_level_tabbed: std::collections::HashSet<&str> = pages
+        .iter()
+        .filter(|p| !p.tabs.is_empty() && p.section.is_none())
+        .map(|p| p.slug.as_str())
+        .collect();
 
     let mut sections_to_render: HashMap<String, &[Page]> = HashMap::new();
 
@@ -133,12 +140,15 @@ fn render_section_indexes(
     }
 
     // Also generate indexes for content subdirectories that exist but have no pages
-    // Skip directories that have an explicit index page (handled by render_pages)
+    // Skip directories that have an explicit index page or are tabbed page bundles
     if content_dir.exists() {
         for entry in fs::read_dir(content_dir)? {
             let entry = entry?;
             if entry.file_type()?.is_dir() {
                 let name = entry.file_name().to_string_lossy().to_string();
+                if top_level_tabbed.contains(name.as_str()) {
+                    continue;
+                }
                 let has_index = section_map.get(&name)
                     .is_some_and(|pages| pages.iter().any(|p| p.slug == "index"));
                 if !has_index {
@@ -225,7 +235,7 @@ pub fn build_site(base_dir: &Path) -> Result<(), Box<dyn std::error::Error>> {
     let output = prepare_output_dir(base_dir, &config)?;
 
     render_pages(&tera, &pages, &site_context, &output)?;
-    render_section_indexes(&tera, &config, &section_map, &site_context, &base_dir.join(&config.content_dir), &output)?;
+    render_section_indexes(&tera, &config, &section_map, &pages, &site_context, &base_dir.join(&config.content_dir), &output)?;
     render_special_pages(&tera, &config, &site_context, &output)?;
     copy_static_assets(base_dir, &config, &output)?;
 

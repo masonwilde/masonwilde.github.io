@@ -34,6 +34,7 @@ pub struct Tab {
     pub name: String,
     pub slug: String,
     pub content: String,
+    pub meta: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -154,6 +155,7 @@ fn load_tabbed_page(
             name,
             slug: tab_slug.clone(),
             content: render_markdown(&tab_body, code_theme),
+            meta: tab_meta,
         });
     }
 
