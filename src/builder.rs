@@ -238,8 +238,102 @@ pub fn build_site(base_dir: &Path) -> Result<(), Box<dyn std::error::Error>> {
     render_section_indexes(&tera, &config, &section_map, &pages, &site_context, &base_dir.join(&config.content_dir), &output)?;
     render_special_pages(&tera, &config, &site_context, &output)?;
     copy_static_assets(base_dir, &config, &output)?;
+    write_search_index(&pages, &output)?;
 
     println!("Built {} pages in {} sections", pages.len(), section_map.len());
+    Ok(())
+}
+
+fn decode_entities(text: &str) -> String {
+    let mut result = String::with_capacity(text.len());
+    let mut chars = text.chars().peekable();
+    while let Some(c) = chars.next() {
+        if c != '&' {
+            result.push(c);
+            continue;
+        }
+        let mut entity = String::new();
+        for ec in chars.by_ref() {
+            if ec == ';' {
+                break;
+            }
+            entity.push(ec);
+            if entity.len() > 8 {
+                break;
+            }
+        }
+        match entity.as_str() {
+            "amp" => result.push('&'),
+            "lt" => result.push('<'),
+            "gt" => result.push('>'),
+            "quot" => result.push('"'),
+            "apos" => result.push('\''),
+            "nbsp" => result.push(' '),
+            s if s.starts_with('#') => {
+                let code = if s.starts_with("#x") || s.starts_with("#X") {
+                    u32::from_str_radix(&s[2..], 16).ok()
+                } else {
+                    s[1..].parse::<u32>().ok()
+                };
+                match code.and_then(char::from_u32) {
+                    Some(decoded) => result.push(decoded),
+                    None => {
+                        result.push('&');
+                        result.push_str(&entity);
+                        result.push(';');
+                    }
+                }
+            }
+            _ => {
+                result.push('&');
+                result.push_str(&entity);
+                result.push(';');
+            }
+        }
+    }
+    result
+}
+
+fn strip_html(html: &str) -> String {
+    let mut result = String::new();
+    let mut in_tag = false;
+    for c in html.chars() {
+        match c {
+            '<' => in_tag = true,
+            '>' => {
+                in_tag = false;
+                result.push(' ');
+            }
+            _ if !in_tag => result.push(c),
+            _ => {}
+        }
+    }
+    let collapsed = result.split_whitespace().collect::<Vec<_>>().join(" ");
+    decode_entities(&collapsed)
+}
+
+fn write_search_index(pages: &[Page], output: &Path) -> Result<(), Box<dyn std::error::Error>> {
+    let index: Vec<serde_json::Value> = pages
+        .iter()
+        .map(|p| {
+            let mut content = strip_html(&p.content);
+            for tab in &p.tabs {
+                content.push(' ');
+                content.push_str(&strip_html(&tab.content));
+            }
+            serde_json::json!({
+                "title": p.title,
+                "description": p.description,
+                "url": p.url,
+                "section": p.section.as_deref().unwrap_or(""),
+                "content": content,
+            })
+        })
+        .collect();
+    fs::write(
+        output.join("search-index.json"),
+        serde_json::to_string(&index)?,
+    )?;
     Ok(())
 }
 
@@ -362,5 +456,100 @@ mod tests {
         let ctx = load_template_context(dir.path(), &config, site_json).unwrap();
 
         assert_eq!(ctx["title"], "Test");
+    }
+
+    #[test]
+    fn strip_html_removes_tags() {
+        assert_eq!(strip_html("<p>Hello <strong>world</strong></p>"), "Hello world");
+    }
+
+    #[test]
+    fn strip_html_collapses_whitespace() {
+        assert_eq!(strip_html("<p>Hello</p>\n\n<p>World</p>"), "Hello World");
+    }
+
+    #[test]
+    fn strip_html_handles_empty() {
+        assert_eq!(strip_html(""), "");
+    }
+
+    #[test]
+    fn strip_html_plain_text_passthrough() {
+        assert_eq!(strip_html("no tags here"), "no tags here");
+    }
+
+    #[test]
+    fn strip_html_decodes_named_entities() {
+        assert_eq!(strip_html("AT&amp;T &lt;b&gt; &quot;hi&quot;"), "AT&T <b> \"hi\"");
+    }
+
+    #[test]
+    fn strip_html_decodes_numeric_entities() {
+        assert_eq!(strip_html("&#39;hello&#39; &#x2014; world"), "'hello' \u{2014} world");
+    }
+
+    #[test]
+    fn strip_html_nested_tags() {
+        assert_eq!(strip_html("<div><p><em>deep</em></p></div>"), "deep");
+    }
+
+    #[test]
+    fn write_search_index_creates_json() {
+        let dir = TempDir::new().unwrap();
+        let pages = vec![
+            Page {
+                title: "Test Page".to_string(),
+                date: "2024-01-01".to_string(),
+                description: "A test".to_string(),
+                template: "page.html".to_string(),
+                content: "<p>Hello world</p>".to_string(),
+                url: "/test/".to_string(),
+                section: Some("blog".to_string()),
+                slug: "test".to_string(),
+                meta: serde_json::json!({}),
+                tabs: vec![],
+            },
+        ];
+        write_search_index(&pages, dir.path()).unwrap();
+
+        let json_str = fs::read_to_string(dir.path().join("search-index.json")).unwrap();
+        let index: Vec<serde_json::Value> = serde_json::from_str(&json_str).unwrap();
+        assert_eq!(index.len(), 1);
+        assert_eq!(index[0]["title"], "Test Page");
+        assert_eq!(index[0]["section"], "blog");
+        assert_eq!(index[0]["content"], "Hello world");
+    }
+
+    #[test]
+    fn write_search_index_includes_tab_content() {
+        use crate::content::Tab;
+        let dir = TempDir::new().unwrap();
+        let pages = vec![
+            Page {
+                title: "Tabbed".to_string(),
+                date: "2024-01-01".to_string(),
+                description: "".to_string(),
+                template: "page.html".to_string(),
+                content: "<p>intro</p>".to_string(),
+                url: "/tabbed/".to_string(),
+                section: None,
+                slug: "tabbed".to_string(),
+                meta: serde_json::json!({}),
+                tabs: vec![
+                    Tab {
+                        name: "Tab One".to_string(),
+                        slug: "tab-one".to_string(),
+                        content: "<p>tab content</p>".to_string(),
+                        meta: serde_json::json!({}),
+                    },
+                ],
+            },
+        ];
+        write_search_index(&pages, dir.path()).unwrap();
+
+        let json_str = fs::read_to_string(dir.path().join("search-index.json")).unwrap();
+        let index: Vec<serde_json::Value> = serde_json::from_str(&json_str).unwrap();
+        assert_eq!(index[0]["content"], "intro tab content");
+        assert_eq!(index[0]["section"], "");
     }
 }

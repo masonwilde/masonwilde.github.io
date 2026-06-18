@@ -106,6 +106,117 @@ nav {
 .dark .icon-sun { display: block; }
 .icon-moon { display: block; }
 
+/* --- Search --- */
+
+#search-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 0.4rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s;
+}
+
+#search-toggle:hover {
+    color: var(--accent);
+}
+
+.search-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.5);
+    padding-top: calc(var(--nav-height) + 1rem);
+}
+
+.search-overlay.active {
+    display: block;
+}
+
+.search-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 0.75rem;
+}
+
+#search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+}
+
+#search-input:focus {
+    border-color: var(--accent);
+}
+
+.search-results {
+    max-width: var(--max-width);
+    margin: 0.5rem auto 0;
+    padding: 0 0.75rem;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.search-result {
+    display: block;
+    padding: 0.75rem 1rem;
+    margin-bottom: 2px;
+    background: var(--bg);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.search-result:hover,
+.search-result.selected {
+    background: var(--card-bg);
+    text-decoration: none;
+}
+
+.search-result-title {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.search-result-section {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--code-bg);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.search-result-desc {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+}
+
+.search-no-results {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 2rem;
+    background: var(--bg);
+    border-radius: 6px;
+}
+
 /* --- Main Content --- */
 
 main {
