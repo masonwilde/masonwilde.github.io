@@ -10,7 +10,7 @@ A client-side media converter using FFmpeg compiled to WebAssembly. Files never 
 
 Supports MP3, WAV, OGG, M4A, FLAC, and AAC output. Drag a file in, pick a format, download the result.
 
-[GitHub](https://github.com/masonwilde/riys-converter)
+[Try it](https://wilde.dev/riys-converter/) | [GitHub](https://github.com/masonwilde/riys-converter)
 
 ## Stack
 
